@@ -1,20 +1,27 @@
 """Generate Markov text from text files."""
 
 from random import choice
+import sys
+# import os
+
+# print("sys: ", sys.argv[1]) # "document.txt"
 
 
-def open_and_read_file(file_path):
+def open_and_read_file(file_path='gettyburg.txt'):
     """Take file path as string; return text as string.
 
     Takes a string that is a file path, opens the file, and turns
     the file's contents as one string of text.
     """
-
+    #argv = [markov.py]
+    if(len(sys.argv) >= 2):
+        file_path = sys.argv[1]
+    
     # your code goes here
-    contents = open('green-eggs.txt').read()
+    contents = open(file_path).read()
+
     # print(contents) 
     return contents
-
 
 def make_chains(text_string):
     """Take input text as string; return dictionary of Markov chains.
@@ -66,7 +73,7 @@ def make_chains(text_string):
         if ((contents_list[i], contents_list[i+1]) in chains):
             chains.get((contents_list[i], contents_list[i+1])).append(contents_list[i+2])
 
-    # print(chains)
+    print(chains)
     return chains
 
 
@@ -93,9 +100,10 @@ def make_text(chains):
     while(rand_value != []):
         rand_key = (words[-2], words[-1]) #(I, am)
         
-        print("loop: ", rand_key)
+        # print("loop: ", rand_key)
+        
         if(rand_key not in chains):
-            print(f"{rand_key} is not in chains, or {rand_value} is empty)")
+            # print(f"{rand_key} is not in chains, or {rand_value} is empty)")
             break 
         
         if chains.get(rand_key) != []:
@@ -105,12 +113,12 @@ def make_text(chains):
             break
         #print(f"{rand_key} exists. random value: {rand_value}")
 
-    print("words: ", words)
+    # print("words: ", words)
 
     return ' '.join(words)
 
 
-input_path = 'green-eggs.txt'
+input_path = 'gettysburg.txt'
 
 # Open the file and turn it into one long string
 input_text = open_and_read_file(input_path)
