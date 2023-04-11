@@ -12,7 +12,7 @@ def open_and_read_file(file_path):
 
     # your code goes here
     contents = open('green-eggs.txt').read()
-    # print(contents)
+    # print(contents) 
     return contents
 
 
@@ -90,21 +90,22 @@ def make_text(chains):
     
     print(rand_key, rand_value)
     #print(words)
-    while(True):
+    while(rand_value != []):
         rand_key = (words[-2], words[-1]) #(I, am)
         
         print("loop: ", rand_key)
-        if(rand_key not in chains or rand_value == []):
+        if(rand_key not in chains):
             print(f"{rand_key} is not in chains, or {rand_value} is empty)")
+            break 
+        
+        if chains.get(rand_key) != []:
+            rand_value = choice(chains.get(rand_key))
+            words.append(rand_value)
+        else:
             break
-        
-        
-        rand_value = choice(chains.get(rand_key))
-        
-        words.append(rand_value)
         #print(f"{rand_key} exists. random value: {rand_value}")
 
-        print(words)
+    print("words: ", words)
 
     return ' '.join(words)
 
