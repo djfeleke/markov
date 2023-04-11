@@ -7,7 +7,7 @@ import sys
 # print("sys: ", sys.argv[1]) # "document.txt"
 
 
-def open_and_read_file(file_path='gettyburg.txt'):
+def open_and_read_file(file_path='green-eggs.txt'):
     """Take file path as string; return text as string.
 
     Takes a string that is a file path, opens the file, and turns
@@ -63,15 +63,15 @@ def make_chains(text_string):
     #contents_list = [words]
 
     # Would you could you in a house?
-    for i in range(0, len(contents_list)- 1):
-       chains[(contents_list[i],contents_list[i+1])] = []
+    for i in range(0, len(contents_list)-2):
+       chains[(contents_list[i],contents_list[i+1], contents_list[i+2])] = []
         
 
     # Loop over the text_string
-    for i in range(0, len(contents_list)-2):
+    for i in range(0, len(contents_list)-3):
         # if (word1, word2) are key in our dictionary we will add as a value word3 
-        if ((contents_list[i], contents_list[i+1]) in chains):
-            chains.get((contents_list[i], contents_list[i+1])).append(contents_list[i+2])
+        if ((contents_list[i], contents_list[i+1], contents_list[i+2]) in chains):
+            chains.get((contents_list[i], contents_list[i+1], contents_list[i+2])).append(contents_list[i+3])
 
     print(chains)
     return chains
@@ -98,7 +98,7 @@ def make_text(chains):
     print(rand_key, rand_value)
     #print(words)
     while(rand_value != []):
-        rand_key = (words[-2], words[-1]) #(I, am)
+        rand_key = (words[-3], words[-2], words[-1]) #(I, am)
         
         # print("loop: ", rand_key)
         
